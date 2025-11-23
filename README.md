@@ -42,16 +42,53 @@ Header:
 Delay.h, stdutils.h, gpioi.h
 
 # PIN DIAGRAM :
+<img width="464" height="241" alt="517794608-303cf282-6c03-48a7-92da-4a15611a0c09" src="https://github.com/user-attachments/assets/6b9c0dd1-8367-44dd-80f0-149c8e435a52" />
+
+P1[23]/MCFB1/PWM1[4]/MISO0 37[1]
+I/OP1 [23] — General purpose digital input/output
+I MCFB1	— Motor control PWM channel 1,Encoder Interface PHB input.
+O PWM1 [4] — Pulse Width Modulator 1, channel 4 outputs.
+I/O MISO 0 — Master In Slave Out for SSP0.
  
 
 # CIRCUIT DIAGRAM:
+<img width="622" height="306" alt="517794589-e1898913-d911-4506-bb8b-64322264389e" src="https://github.com/user-attachments/assets/4775c1d2-de4b-4fcf-b6d2-80dfcec18ab8" />
+
  
  
 # PROGRAM:
+```
+#include <lpc17xx.h>
 
+#include "delay.h"	//User defined library which conatins the delay routines #include "gpio.h"
 
+#define LED P1_29	// Led is connected to P1.29
+
+/* start the main program */ int main()
+
+{
+
+SystemInit();	//Clock and PLL configuration GPIO_PinFunction(LED,PINSEL_FUNC_0); // Configure Pin for Gpio GPIO_PinDirection(LED,OUTPUT);	// Configure the pin as OUTPUT GPIO_PinWrite(LED,LOW);
+while(1)
+
+{
+
+/* Turn On all the leds and wait for 100ms */ GPIO_PinWrite(LED,HIGH);	// Make all the Port pin as high DELAY_ms(100);
+
+GPIO_PinWrite(LED,LOW);	// Make all the Port pin as low DELAY_ms(100);
+
+}
+
+}
+```
  
-# Output:
+# Output
+<img width="642" height="466" alt="517794447-dd35d08d-44e4-4c77-89d1-7bde023f1dc4" src="https://github.com/user-attachments/assets/45e2b03b-694e-419f-9e6d-01c95cf10b20" />
+
+# Result:
+Thus a LED is interfaced with ARM LPC1768 microprocessor and its blinking was verified successfully.
+
+
 
 
 
